@@ -1,0 +1,23 @@
+.main-section-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.button-login {
+    padding: 10px;
+    width: 100px;
+    cursor: cell;
+    margin: 10px;
+}
+
+.button-login:hover {
+    transform: scale(1.1, 1.1);
+}
+.input {
+    padding: 10px;
+    width: 250px;
+    margin: 10px;
+}

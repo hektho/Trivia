@@ -1,0 +1,17 @@
+.main-section-expired {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.main-section-expired button {
+    padding: 10px;
+    cursor: cell;
+
+}
+
+.main-section-expired button:hover {
+    transform: scale(1.1,1.1);
+}

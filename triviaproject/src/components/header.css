@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    margin: auto;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom: 2px black solid;
+}
+
+.img-player {
+    border: 2px double black;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.name-score {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 20px;
+    text-align: center;
+}

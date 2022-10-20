@@ -1,0 +1,36 @@
+.border-color-red {
+    border: 1px solid red;
+}
+
+.border-color-green {
+    border: 1px solid green;
+}
+
+.main-section-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.main-section-game h2 {
+    font-weight: 400;
+    border-bottom: 1px solid black;
+    width: 70%;
+    white-space: pre-wrap;
+    text-align: center;
+    padding: 5px;
+}
+
+.main-section-game button {
+    padding: 10px;
+    margin: 5px;
+    margin-top: 10px;
+    font-size: medium;
+    cursor: cell;
+}
+
+.main-section-game button:hover {
+    transform: scale(1.1,1.1);
+}
+

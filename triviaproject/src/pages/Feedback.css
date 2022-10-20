@@ -1,0 +1,16 @@
+.main-feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.h1-feedback {
+    font-size: 32px;
+}
+
+.form-feedback button {
+    padding: 10px;
+    margin: 5px;
+    cursor: cell;
+}

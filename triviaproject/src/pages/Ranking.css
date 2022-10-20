@@ -1,0 +1,29 @@
+.main-section-ranking {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-ranks > * {
+    font-size: 18px;
+    margin: 5px;
+    font-weight: 400;
+}
+
+.info-ranks {
+    margin-top: 30px;
+    border-bottom: 1px solid black;
+    border-radius: 3px;
+}
+
+.main-section-ranking button {
+    padding: 10px;
+    font-size: medium;
+    margin: 5px;
+    cursor: cell;
+}
+
+dialog button:hover {
+    transform: scale(1.1, 1.1);
+}
