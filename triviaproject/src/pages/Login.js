@@ -78,7 +78,7 @@ class LoginScreen extends Component {
           <span
             style={ { color: 'red', fontWeight: '600' } }
           > 
-              Valid name and password required!
+              Valid name and e-mail required!
           </span> }
       </section>
     );
