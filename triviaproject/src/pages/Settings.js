@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Loading from '../components/loading';
-import { changeSettingsAction, fetchCategories } from '../redux/actions';
+import { changeSettingsAction, fetchCategories, isFetching } from '../redux/actions';
 import './Settings.css';
 
 class Settings extends Component {
@@ -29,11 +29,44 @@ class Settings extends Component {
     this.setState({ [name]: value.toLowerCase() });
   }
 
-  sendToRedux = () => {
-    const { dispatchSettings } = this.props;
-    
+  verifyQuestions = async () => {
+    let keys = Object.entries(this.state);
+
+    let url = `https://opentdb.com/api.php?`;
+
+    keys.forEach((i) => {
+      console.log(i)
+      if (!i[1].startsWith('any') && !i[1].startsWith('Any')) {
+        url += `&${i[0]}=${i[1]}`
+      }
+    });
+
+    console.log(url);
+
+    const response = await fetch(url);
+
+    const json = await response.json();
+    console.log(json);
+    if (json.response_code === 1) {
+      return false;
+    }
+
+    return true;
+
+  }
+
+  sendToRedux = async () => {
+    const { dispatchSettings, dispatchIsFetching } = this.props;
+    dispatchIsFetching();
+    console.log(this.verifyQuestions());
+    if (!await this.verifyQuestions()) {
+      alert('Could not find this amount of questions!');
+      dispatchIsFetching();
+      return;
+    }
+
     dispatchSettings(this.state);
-    
+    dispatchIsFetching();
     window.alert('Settings were applied!');
 
     this.setState({
@@ -132,7 +165,9 @@ class Settings extends Component {
             type='button' 
             onClick={ () => history.goBack() } 
           > Back </button>
-
+          <span id='alert-message' style={{ display: 'none', color: 'red' }}>
+            Could not find this amount of questions!
+          </span>
         </section>
       </section>
     )
@@ -149,6 +184,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchCategories: () => dispatch(fetchCategories()),
   dispatchSettings: (settings) => dispatch(changeSettingsAction(settings)),
+  dispatchIsFetching: () => dispatch(isFetching()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

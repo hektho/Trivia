@@ -5,7 +5,8 @@ import Loading from '../components/loading';
 import Timer from '../components/timer';
 import { assertionAction, changeScoreAction, currentQuestion, fetchQuestions, resetTimerAction } from '../redux/actions'
 import './Game.css';
-
+import acertou from '../audiosAndImages/acertou.mp3';
+import errou from '../audiosAndImages/errou-faustao.mp3';
 class Game extends Component {
   constructor() {
     super();
@@ -124,6 +125,7 @@ class Game extends Component {
                 {answersShuffled.map((i, index) => {
                   if (questions[currentQuestion].correct_answer === i) {
                     return <button 
+                      key={ i }
                       disabled={ disabled }
                       type='button' 
                       id='correct' 
@@ -135,12 +137,15 @@ class Game extends Component {
                           this.enableNextButton();
                           this.disableButtons();
                           dispatchAssertion();
+                          const audio = new Audio(acertou);
+                          audio.play();
                         }}
                     > 
                       { i } 
                     </button>
                   }
                   return <button
+                    key={ i }
                     disabled={ disabled }
                     type='button' 
                     id={`incorrect-${index}`}
@@ -149,7 +154,8 @@ class Game extends Component {
                         .classList.add('border-color-red');
                       this.enableNextButton();
                       this.disableButtons();
-
+                      const audio = new Audio(errou);
+                      audio.play();
                     } }
                   > 
                     { i } 

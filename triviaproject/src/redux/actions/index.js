@@ -32,21 +32,32 @@ export const fetchQuestions = (history) => {
 
   keys.forEach((i) => {
     console.log(i)
-    if (!i[1].startsWith('Any')) {
+    if (!i[1].startsWith('any') && !i[1].startsWith('Any') ) {
       url += `&${i[0]}=${i[1]}`
     }
   });
   
+  console.log(url);
   return async (dispatch) => {
     dispatch(isFetching());
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${url}&token=${token}`);
       const questions = await response.json();
+      console.log(questions);
       if (questions.response_code === 3) {
         localStorage.setItem('token', '');
         dispatch(isFetching());
         return history.push('/expired');
+      }
+
+      if (questions.response_code === 4) {
+        const response = await fetch(`
+          https://opentdb.com/api_token.php?command=reset&token=${localStorage.getItem('token')}
+        `);
+        const json = await response.json();
+        
+        console.log(json);
       }
       dispatch(questionsAction(questions.results));
       return dispatch(isFetching());
