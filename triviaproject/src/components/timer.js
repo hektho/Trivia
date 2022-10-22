@@ -14,7 +14,6 @@ class Timer extends Component {
   startTimer = () => {
     this.interval = setInterval(() => {
       const { changeTimer } = this.props;
-      console.log('vc é gay');
       changeTimer();
       this.verifyTimer();
     }, 1000);
