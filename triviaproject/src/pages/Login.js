@@ -14,12 +14,28 @@ class LoginScreen extends Component {
     };
   }
 
+  componentDidMount() {
+    const { name, email } = this.props;
+    console.log(name, email);
+    this.setState({ name, email }, () => {
+      const { email, name } = this.state;
+
+      const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      if (regex.test(email) && name.length) {
+        this.setState({ disabled: false });
+      } else {
+        this.setState({ disabled: true });
+      }
+    });
+  }
+
   inputChange = ({ target }) => {
     const { value, name } = target;
 
     this.setState({ [name]: value }, () => {
       const { email, name } = this.state;
-
+      const { loginDispatch } = this.props;
+      loginDispatch({name, email});
       const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
       if (regex.test(email) && name.length) {
@@ -88,6 +104,8 @@ class LoginScreen extends Component {
 const mapStateToProps = (state) => ({
   loginState: state.loginReducer.state,
   isFetching: state.fetchReducer.isFetching,
+  name: state.loginReducer.name,
+  email: state.loginReducer.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
