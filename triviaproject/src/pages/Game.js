@@ -73,9 +73,8 @@ class Game extends Component {
   }
 
   shuffleAnswers = (questions, curr) => {
-    console.log('chamou');
     const allQuestions = [...questions[curr].incorrect_answers, questions[curr].correct_answer];
-    if (allQuestions.length > 2) {
+    if (allQuestions.length > 0) {
       for(let i = allQuestions.length-1; i > 0; i -= 1) {
         let j = Math.floor(Math.random() * (i + 1));
         [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]]
